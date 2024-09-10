@@ -1,10 +1,10 @@
-import { Button } from './components/ui/button'
+import { Outlet } from 'react-router-dom'
 
 const App = () => {
   return (
-    <div className='h-screen w-screen grid place-content-center'>
-      <Button>Click me!</Button>
-    </div>
+    <main>
+      <Outlet />
+    </main>
   )
 }
 
