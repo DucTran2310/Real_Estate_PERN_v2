@@ -6,12 +6,15 @@ module.exports = {
   ],
   theme: {
   	extend: {
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		},
-  		colors: {}
+  		colors: {
+				primary: '#091a2b',
+				main: '#005163',
+				secondary: '#f1f3f4'
+			},
+			backgroundColor: {
+				primary: '#f1f3f4',
+				main: '#005163'
+			}
   	}
   },
   plugins: [require("tailwindcss-animate")],

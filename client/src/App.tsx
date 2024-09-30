@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 
 const App = () => {
   return (
-    <main>
+    <main className='text-primary'>
       <Outlet />
     </main>
   )
