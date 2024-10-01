@@ -18,4 +18,3 @@ const connectionDatabase = async  () => {
 module.exports = {
   connectionDatabase 
 } 
- 
