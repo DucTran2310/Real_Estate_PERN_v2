@@ -9,7 +9,8 @@ interface FormInputProps {
   label?: string,
   name: string,
   type?: 'text' | 'password',
-  placeholder?: string
+  placeholder?: string,
+  className?: string
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -17,7 +18,8 @@ const FormInput: React.FC<FormInputProps> = ({
   label,
   name,
   type = "text",
-  placeholder
+  placeholder,
+  className
 }) => {
 
   return (
@@ -30,7 +32,7 @@ const FormInput: React.FC<FormInputProps> = ({
           <FormControl>
             <Input
               type={type}
-              className={cn(resetOutline, placeHolderCn)}
+              className={cn(resetOutline, placeHolderCn, className)}
               {...field}
               placeholder={placeholder}
             />

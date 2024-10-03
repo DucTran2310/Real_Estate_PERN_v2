@@ -1,6 +1,6 @@
 import { naviItemcn } from '@/lib/className'
 import { cn } from '@/lib/utils'
-import { Fragment } from 'react'
+import { Fragment, useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import {
@@ -16,6 +16,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Login } from '../login'
 
 const Header = () => {
+
+  const [isShowDialog, setIsShowDialog] = useState<boolean>(false)
+
+  const onClose = useCallback(() => {
+    setIsShowDialog(false)
+  }, [])
 
   return (
     <div className='h-24 p-4 shadow flex items-center justify-between'>
@@ -58,9 +64,15 @@ const Header = () => {
         </NavigationMenu>
       </div>
       <div className='flex items-center gap-3'>
-        <Dialog>
+        <Dialog
+          onOpenChange={(isOpen: boolean) => setIsShowDialog(isOpen)}
+          open={isShowDialog}
+        >
           <DialogTrigger asChild>
-            <Button className='bg-transparent text-stone-900 hover:bg-transparent hover:underline'>
+            <Button
+              onClick={() => setIsShowDialog(true)}
+              className='bg-transparent text-stone-900 hover:bg-transparent hover:underline'
+            >
               Đăng nhập/ Đăng ký
             </Button>
           </DialogTrigger>
@@ -70,7 +82,7 @@ const Header = () => {
           >
             <DialogHeader>
               <DialogTitle></DialogTitle>
-              <Login />
+              <Login onClose={onClose}/>
             </DialogHeader>
           </DialogContent>
         </Dialog>
