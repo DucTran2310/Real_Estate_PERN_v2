@@ -1,8 +1,14 @@
-import React from 'react'
+import { BannerSlider } from '@/components/layouts'
+import { Search } from '@/components/searchs'
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div className='relative'>
+      <BannerSlider />
+      <div>
+        <Search />
+      </div>
+    </div>
   )
 }
 

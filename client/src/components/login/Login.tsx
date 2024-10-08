@@ -8,7 +8,6 @@ import { FormInput } from '../forms'
 import { Form } from '../ui/form'
 import { Button } from '../ui/button'
 import React, { useState } from 'react'
-import { SIGNIN, SIGNUP } from '@/utils/constants'
 import google from '../../assets/svg/google.svg'
 import { useGoogleLogin } from '@react-oauth/google'
 import { apiGetCredentialsFromAccessToken } from '@/apis/externals'
@@ -16,6 +15,7 @@ import { apiCheckNewUser } from '@/apis/auth'
 import SetupPassword from './SetupPassword'
 import useUserStore from '@/zustand/useUserStore'
 import { toast } from 'sonner'
+import { SIGNIN, SIGNUP } from '@/lib/constants'
 
 interface LoginProps {
   onClose: () => void

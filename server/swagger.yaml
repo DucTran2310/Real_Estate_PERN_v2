@@ -1,0 +1,71 @@
+openapi: 3.0.3
+info:
+  title: Swagger Real Estate PERN
+  description: |-
+    This is source code BackEnd Real Estate PERN
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5001/api/v1/
+
+tags:
+  - name: AUTH
+    description: Các API liên quan đến xác thực
+
+paths:
+  /auth/has-user/{email}:
+    get:
+      tags:
+        - AUTH
+      summary: Kiểm tra người dùng
+      description: Kiểm tra người dùng đã có trong hệ thống chưa?
+      operationId: hasUser
+      parameters:
+        - name: email
+          in: path
+          required: true
+          description: Email của người dùng cần kiểm tra
+          schema:
+            type: string
+            example: trananhduc23102000@gmail.com
+      responses:
+        "200":
+          description: Đăng nhập thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessHasUser"
+        "422":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid email format."
+
+components:
+  schemas:
+    SuccessHasUser:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        hasUser:
+          type: boolean
+          example: true
+        userToken:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUsImlhdCI6MTcyODAyNjAzMCwiZXhwIjoxNzI4NjMwODMwfQ.cZmzDFvufnF9p3i3897Hh0HK18BMsOi5hHht9zoyEwk"
+        toastMessage:
+          type: string
+          example: "Đăng nhập thành công"
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
