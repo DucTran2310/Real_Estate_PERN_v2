@@ -1,8 +1,6 @@
-import { naviItemcn } from '@/lib/className'
-import { cn } from '@/lib/utils'
-import { Fragment } from 'react'
-import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent } from '@/components/ui/dropdown-menu'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,12 +8,26 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger
-} from '../ui/navigation-menu'
-import navigations from './navigations'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+} from '@/components/ui/navigation-menu'
+import { naviItemcn, resetOutline } from '@/lib/className'
+import { cn } from '@/lib/utils'
+import useUserStore from '@/zustand/useUserStore'
+import { LogOut } from 'lucide-react'
+import { Fragment, useCallback, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Login } from '../login'
+import menus from './menu'
+import navigations from './navigations'
 
 const Header = () => {
+
+  const { user, logout } = useUserStore()
+
+  const [isShowDialog, setIsShowDialog] = useState<boolean>(false)
+
+  const onClose = useCallback(() => {
+    setIsShowDialog(false)
+  }, [])
 
   return (
     <div className='h-24 p-4 shadow flex items-center justify-between'>
@@ -58,22 +70,58 @@ const Header = () => {
         </NavigationMenu>
       </div>
       <div className='flex items-center gap-3'>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button className='bg-transparent text-stone-900 hover:bg-transparent hover:underline'>
-              Đăng nhập/ Đăng ký
-            </Button>
-          </DialogTrigger>
-          <DialogContent
-            isHideClose={true}
-            className='min-w-[700px] p-0'
-          >
-            <DialogHeader>
-              <DialogTitle></DialogTitle>
-              <Login />
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
+        {
+          !user ?
+            <Dialog
+              onOpenChange={(isOpen: boolean) => setIsShowDialog(isOpen)}
+              open={isShowDialog}
+            >
+              <DialogTrigger asChild>
+                <Button
+                  onClick={() => setIsShowDialog(true)}
+                  className='bg-transparent text-stone-900 hover:bg-transparent hover:underline'
+                >
+                  Đăng nhập/ Đăng ký
+                </Button>
+              </DialogTrigger>
+              <DialogContent
+                isHideClose={true}
+                className='min-w-[700px] p-0'
+              >
+                <DialogHeader>
+                  <DialogTitle></DialogTitle>
+                  <Login onClose={onClose} />
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
+            : (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className={resetOutline} variant='transparent'>
+                    <img src={user.avatar} className='rounded-full w-[30px] h-[30px]'/>
+                    {user.fullname}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  {menus.map(el => <DropdownMenuItem>
+                    <Link className='flex items-center gap-2' to={el.path} key={el.id}>
+                      {el.icon}
+                      {el.label}
+                    </Link>
+                  </DropdownMenuItem>)}
+                  <DropdownMenuItem
+                    onClick={() => {
+                      logout()
+                    }}
+                    className='flex items-center gap-2'
+                  >
+                    <LogOut size={14} />
+                    <span className='cursor-pointer'>Đăng xuất</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )
+        }
         <Button size='lg' variant='outline'>
           Đăng tin
         </Button>
