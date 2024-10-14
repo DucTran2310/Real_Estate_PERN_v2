@@ -30,8 +30,6 @@ const PopoverCheckbox:React.FC<PopoverCheckboxProps> = ({name, label, options = 
     }
   }, [])
 
-  console.log('VVVOPTIONS: ', options)
-  
   return (
     <Popover>
       <PopoverTrigger ref={triggerRef} className="border rounded-md py-2">{label}</PopoverTrigger>
