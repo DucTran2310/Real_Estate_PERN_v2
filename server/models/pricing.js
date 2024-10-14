@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       values: enumData.pricings
     },
     isDisplayImmediately: DataTypes.BOOLEAN,
-    isShowDescription: DataTypes.BOOLEAN,
+    levelShowDescription: DataTypes.FLOAT,
     priority: DataTypes.INTEGER,
     requireScore: DataTypes.INTEGER,
     requireScoreNextLevel: DataTypes.INTEGER,

@@ -53,7 +53,9 @@ module.exports = {
         references: {
           model: 'Pricings',
           key: 'id'
-        }
+        },
+        allowNull: false,
+        defaultValue: 1
       },
       createdAt: {
         allowNull: false,

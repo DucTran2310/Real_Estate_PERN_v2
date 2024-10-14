@@ -19,8 +19,8 @@ module.exports = {
       isDisplayImmediately: {
         type: Sequelize.BOOLEAN
       },
-      isShowDescription: {
-        type: Sequelize.BOOLEAN 
+      levelShowDescription: {
+        type: Sequelize.FLOAT 
       },
       priority: {
         type: Sequelize.INTEGER

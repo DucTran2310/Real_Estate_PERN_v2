@@ -1,8 +1,8 @@
 import { Image, TooltipCustom } from "@/components/layouts";
 import { generateDefaultAvatar } from "@/lib/utils";
 import useUserStore from "@/zustand/useUserStore";
-import diamond from "@/assets/svg/badge-stock/dinamond.svg";
 import { Info } from "lucide-react";
+import { formatNumberWithComma } from "@/utils/commonFunction";
 
 const UserBox = () => {
   const { user } = useUserStore();
@@ -18,7 +18,7 @@ const UserBox = () => {
         />
         <div className="absolute bg-white rounded-full bottom-1 right-1">
           <Image
-            src={diamond}
+            src={user?.rPricing?.imageUrl ?? ''}
             className="w-6 h-6 object-cover border-2 border-slate-200 p-[2px] rounded-full"
           />
         </div>
@@ -33,9 +33,9 @@ const UserBox = () => {
             content={
               <>
                 <p>
-                  <span>Hạng tài khoản </span><span>Kim cương</span>
+                  <span>Hạng tài khoản: </span><span>{user?.rPricing.name}</span>
                 </p>
-                <p>Bạn cần tích luỹ thêm 1000 điểm để lên level tiếp theo</p>
+                <p>Bạn cần tích luỹ thêm <span>{formatNumberWithComma(Number(user?.rPricing?.requireScoreNextLevel))}</span> điểm để lên level tiếp theo</p>
               </>
             }
           />

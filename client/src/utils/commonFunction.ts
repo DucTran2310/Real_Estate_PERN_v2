@@ -28,3 +28,12 @@ export const deepEqual = (obj1: any, obj2: any): boolean => {
   return true;
 };
 //================================================================================================================================
+//********Number format ****************//
+export function formatNumberWithComma(number: number): string {
+
+  if (isNaN(number)) {
+      return 'Invalid input';
+  }
+
+  return number.toLocaleString('en-US');
+}

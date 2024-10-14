@@ -6,7 +6,8 @@ module.exports = {
     const {uid} = req.user
 
     const infoUser = await db.User.findByPk(uid, {
-      attributes: { exclude: ['password', 'resetPwdExpiry',  'resetPwdToken'] }
+      attributes: { exclude: ['password', 'resetPwdExpiry',  'resetPwdToken'] },
+      include: [{model: db.Pricing, as: "rPricing", attributes: {exclude: ['createdAt', 'updatedAt']}}]
     })
 
     return res.json({
