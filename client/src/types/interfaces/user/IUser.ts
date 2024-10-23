@@ -20,7 +20,7 @@ export interface IRPricing {
 
 export interface IUser {
   avatar: string;
-  balance: string;
+  balance: string | number;
   createdAt: string;
   email: string;
   emailVerified: boolean;

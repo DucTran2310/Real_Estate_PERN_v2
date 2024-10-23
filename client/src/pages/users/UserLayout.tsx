@@ -16,8 +16,8 @@ const UserLayout = () => {
   return (
     <div>
       <Header />
-      <div className="flex">
-        <div className="w-[256px] flex-none">
+      <div className="flex h-[calc(100vh-96px)] bg-slate-100">
+        <div className="w-[256px] h-full flex-none">
           <UserSidebar />
         </div>
         <div className="flex-auto">

@@ -10,7 +10,8 @@ interface FormInputProps {
   name: string,
   type?: 'text' | 'password',
   placeholder?: string,
-  className?: string
+  className?: string,
+  readonly?: boolean
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -19,7 +20,8 @@ const FormInput: React.FC<FormInputProps> = ({
   name,
   type = "text",
   placeholder,
-  className
+  className,
+  readonly
 }) => {
 
   return (
@@ -32,9 +34,10 @@ const FormInput: React.FC<FormInputProps> = ({
           <FormControl>
             <Input
               type={type}
-              className={cn(resetOutline, placeHolderCn, className)}
+              className={cn(resetOutline, placeHolderCn, className, readonly && 'bg-slate-100 cursor-not-allowed')}
               {...field}
               placeholder={placeholder}
+              readOnly={readonly}
             />
           </FormControl>
           <FormMessage />
